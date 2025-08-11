@@ -26,6 +26,7 @@ public class Main {
         courses[1] = new Course();
         courses[1].setDetails("MA202", "Linear Algebra");
 
+        
         System.out.println("\nRegistered Students: ");
         for(Student student : students) {
             if(student != null) student.displayDetails();
