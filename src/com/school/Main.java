@@ -14,19 +14,17 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("--- School Attendance System ---");
 
-        Student[] students = new Student[2];
-        students[0] = new Student();
-        students[0].setDetails(1, "Alice Wonderland");
-        students[1] = new Student();
-        students[1].setDetails(2, "Bob the builder");
+        Student[] students = new Student[4];
+        students[0] = new Student("Alice Wonderland");
+        students[1] = new Student("Bob the builder");
+        students[2] = new Student("Charlie Chaplin");
+        students[3] = new Student("Dora Explorer");
 
-        Course[] courses = new Course[2];
-        courses[0] = new Course();
-        courses[0].setDetails("cs101", "Intro to programming");
-        courses[1] = new Course();
-        courses[1].setDetails("MA202", "Linear Algebra");
+        Course[] courses = new Course[3];
+        courses[0] = new Course("Intro to programming");
+        courses[1] = new Course("Linear Algebra");
+        courses[2] = new Course("Physics 101");
 
-        
         System.out.println("\nRegistered Students: ");
         for(Student student : students) {
             if(student != null) student.displayDetails();
@@ -36,7 +34,6 @@ public class Main {
         for(Course course : courses) {
             if (course != null) course.displayDetails();
         }
-        System.out.println("\nSession 2: Core Domain Modelling Complete");
-
+        System.out.println("\nSession 3: Constructors and Auto-ID Generation Complete");
     }
 }
