@@ -13,10 +13,10 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("--- School Attendance System ---");
 
-        ArrayList<Student> students = new ArrayList<>();
-        students.add(new Student("Alice Wonderland", "Grade 10"));
-        students.add(new Student("Bob the builder", "Grade 11"));
-        students.add(new Student("Charlie Chaplin", "Grade 12"));
+        ArrayList<Student> allStudents = new ArrayList<>();
+        allStudents.add(new Student("Alice Wonderland", "Grade 10"));
+        allStudents.add(new Student("Bob the builder", "Grade 11"));
+        allStudents.add(new Student("Charlie Chaplin", "Grade 12"));
 
         Teacher teacher1 = new Teacher("Dr. Smith", "Mathematics");
         Teacher teacher2 = new Teacher("Ms. Johnson", "Computer Science");
@@ -25,7 +25,7 @@ public class Main {
         Staff staff2 = new Staff("Jane Security", "Security Guard");
 
         ArrayList<Person> schoolPeople = new ArrayList<>();
-        schoolPeople.addAll(students);
+        schoolPeople.addAll(allStudents);
         schoolPeople.add(teacher1);
         schoolPeople.add(teacher2);
         schoolPeople.add(staff1);
@@ -34,23 +34,35 @@ public class Main {
         System.out.println("\n--- School Directory ---");
         displaySchoolDirectory(schoolPeople);
 
-        ArrayList<Course> courses = new ArrayList<>();
-        courses.add(new Course("Intro to programming"));
-        courses.add(new Course("Linear Algebra"));
-
-        ArrayList<AttendanceRecord> records = new ArrayList<>();
-        records.add(new AttendanceRecord(students.get(0), courses.get(0), "Present"));
-        records.add(new AttendanceRecord(students.get(1), courses.get(1), "Absent"));
-        records.add(new AttendanceRecord(students.get(2), courses.get(0), "Late")); // Invalid
+        ArrayList<Course> allCourses = new ArrayList<>();
+        allCourses.add(new Course("Intro to programming"));
+        allCourses.add(new Course("Linear Algebra"));
 
         System.out.println("\nRegistered Students:");
-        for (Student s : students) s.displayDetails();
+        for (Student s : allStudents) s.displayDetails();
 
         System.out.println("\nAvailable Courses:");
-        for (Course c : courses) c.displayDetails();
+        for (Course c : allCourses) c.displayDetails();
 
-        System.out.println("\nAttendance Records:");
-        for (AttendanceRecord r : records) r.displayRecord();
+        FileStorageService storage = new FileStorageService();
+        AttendanceService attendanceService = new AttendanceService(storage);
+
+        System.out.println("\n--- Marking Attendance ---");
+        attendanceService.markAttendance(allStudents.get(0), allCourses.get(0), "Present");
+        attendanceService.markAttendance(allStudents.get(1), allCourses.get(1), "Absent");
+        attendanceService.markAttendance(2, 101, "Present", allStudents, allCourses);
+        attendanceService.markAttendance(3, 102, "Late", allStudents, allCourses);
+
+        System.out.println("\n--- All Attendance Records ---");
+        attendanceService.displayAttendanceLog();
+
+        System.out.println("\n--- Attendance for Alice ---");
+        attendanceService.displayAttendanceLog(allStudents.get(0));
+
+        System.out.println("\n--- Attendance for Intro to programming ---");
+        attendanceService.displayAttendanceLog(allCourses.get(0));
+
+        attendanceService.saveAttendanceData();
 
         List<Student> studentsForSaving = new ArrayList<>();
         for (Person person : schoolPeople) {
@@ -59,11 +71,9 @@ public class Main {
             }
         }
 
-        FileStorageService storage = new FileStorageService();
         storage.saveData(studentsForSaving, "students.txt");
-        storage.saveData(courses, "courses.txt");
-        storage.saveData(records, "attendance_log.txt");
+        storage.saveData(allCourses, "courses.txt");
 
-        System.out.println("\nSession 7: Polymorphism and Enhanced Records Complete");
+        System.out.println("\nSession 8: AttendanceService with Method Overloading Complete");
     }
 }

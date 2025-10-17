@@ -46,6 +46,14 @@ AttendanceSystem/
 - Implemented proper filtering using `instanceof` when saving Student data to files.
 - Maintained backward compatibility with file storage while providing enhanced object composition.
 
+## Part 8: AttendanceService with Method Overloading
+- Created `AttendanceService` class to manage attendance operations with encapsulated attendance log.
+- Implemented overloaded `markAttendance()` methods accepting either object references or IDs with lookup functionality.
+- Added helper methods `findStudentById()` and `findCourseById()` for ID-based lookups.
+- Implemented overloaded `displayAttendanceLog()` methods for all records, student-specific, and course-specific filtering.
+- Integrated `FileStorageService` for centralized attendance data persistence.
+- Demonstrated method overloading and service-oriented architecture in `Main.java`.
+
 ## How to Run
 
 1. Navigate to the project root directory.
@@ -75,6 +83,7 @@ Attendance_management_project/
 │           ├── Staff.java
 │           ├── Storable.java
 │           ├── FileStorageService.java
+│           ├── AttendanceService.java
 │           └── Main.java
 └── README.md
 ```
