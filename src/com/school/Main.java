@@ -14,7 +14,7 @@ public class Main {
         RegistrationService regService = new RegistrationService(storage);
         AttendanceService attendanceService = new AttendanceService(storage, regService);
 
-        // Register students
+        // Register
         regService.registerStudent("Alice Wonderland", "Grade 10");
         regService.registerStudent("Bob the builder", "Grade 11");
         regService.registerStudent("Charlie Chaplin", "Grade 12");
